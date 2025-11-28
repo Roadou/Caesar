@@ -40,22 +40,23 @@ int main(int argc, const char* argv[]) {
     }
     
     int key = strtoimax(argv[2], &endptr, 10);
-    char* processed_string = malloc(strlen(argv[3]));
+    int len = strlen(argv[3]);
+    char* processed_string = malloc(len + 1);
 
     if(strcmp(argv[1], "--decrypt") == 0) {
-        for(int i = 0; i < strlen(argv[3]); i++)
+        for(int i = 0; i < len; i++)
         {
             processed_string[i] = caesar_decrypt(argv[3][i], key);
         }
-        printf("Encrypted string is %s\n", processed_string);
     }
     else if(strcmp(argv[1], "--encrypt") == 0) {
-        for(int i = 0; i < strlen(argv[3]); i++)
+        for(int i = 0; i < len; i++)
         {
             processed_string[i] = caesar_encrypt(argv[3][i], key);
         }
-        printf("Encrypted string is %s\n", processed_string);
     }
+    processed_string[len] = '\0';
+    printf("%s\n", processed_string);
 
     free(processed_string);
 }
